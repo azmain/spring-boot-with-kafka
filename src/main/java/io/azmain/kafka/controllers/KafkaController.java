@@ -3,6 +3,7 @@ package io.azmain.kafka.controllers;
 
 import io.azmain.kafka.services.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,7 +18,7 @@ public class KafkaController {
     }
 
     @GetMapping(value = "/publish/{message}")
-    public void sendMessageToKafkaTopic(@PathVariable("message") final String message) {
-        this.producer.sendMessage(message);
+    public ResponseEntity sendMessageToKafkaTopic(@PathVariable("message") final String message) {
+        return ResponseEntity.ok(this.producer.sendMessage(message));
     }
 }
